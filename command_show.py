@@ -5,4 +5,5 @@ from inventory import Inventory
 
 def run(args):
     with Inventory(args.inventory) as inventory:
-        inventory.add_item(args.item, args.count)
+        for item in inventory.get_items():
+            print(f'{item["name"]}: {item["count"]}')

@@ -3,6 +3,7 @@
 import argparse
 
 import command_add
+import command_show
 import command_top
 
 
@@ -15,7 +16,10 @@ def parse_args():
     parser_add = subparsers.add_parser('add', help='add an item to inventory')
     parser_add.set_defaults(command=command_add.run)
     parser_add.add_argument('item')
-    parser_add.add_argument('quantity', nargs='?', default=1, type=int)
+    parser_add.add_argument('count', nargs='?', default=1, type=int)
+
+    parser_top = subparsers.add_parser('show', help='show full inventory')
+    parser_top.set_defaults(command=command_show.run)
 
     parser_top = subparsers.add_parser('top', help='sort inventory by value')
     parser_top.set_defaults(command=command_top.run)
