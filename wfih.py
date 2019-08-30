@@ -15,7 +15,7 @@ def create_parser():
 
     parser_add = subparsers.add_parser('add', help='add an item to inventory')
     parser_add.set_defaults(command=command_add.run)
-    parser_add.add_argument('item')
+    parser_add.add_argument('item', nargs='?')
     parser_add.add_argument('count', nargs='?', default=1, type=int)
 
     parser_top = subparsers.add_parser('show', help='show full inventory')
