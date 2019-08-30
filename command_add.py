@@ -6,7 +6,7 @@ from market import Market
 
 def run(args):
     with Inventory(args.inventory) as inventory:
-        item = Market(args.market).find_item(args.item)
+        item = Market(args.market).guess_name(args.item)
         inventory.add_item(item, args.count)
         if args.count < 0:
             print(f'removed {-args.count}x {item} from inventory')

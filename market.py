@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import difflib
 import json
 
 
@@ -8,7 +9,8 @@ class Market:
         with open(file, 'r') as f:
             self.db = json.load(f)['items']
 
-    def find_item(self, item):
-        if item in self.db:
-            return item
-        raise Exception('could not find item')
+    def guess_name(self, item):
+        matches = difflib.get_close_matches(item, self.db.keys(), 1, 0.1)
+        if not matches:
+            raise Exception('could not find item')
+        return matches[0]
