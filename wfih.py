@@ -7,11 +7,12 @@ import command_show
 import command_top
 
 
-def parse_args():
+def create_parser():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(help="subcommands")
 
     parser.add_argument('-i', '--inventory', default='data/inventory.db', help='path to inventory database')
+    parser.add_argument('-m', '--market', default='data/market.json', help='path to market database')
 
     parser_add = subparsers.add_parser('add', help='add an item to inventory')
     parser_add.set_defaults(command=command_add.run)
@@ -24,9 +25,13 @@ def parse_args():
     parser_top = subparsers.add_parser('top', help='sort inventory by value')
     parser_top.set_defaults(command=command_top.run)
 
-    return parser.parse_args()
+    return parser
 
 
 if __name__ == '__main__':
-    args = parse_args()
-    args.command(args)
+    parser = create_parser()
+    args = parser.parse_args()
+    if 'command' in args:
+        args.command(args)
+    else:
+        parser.print_help()
