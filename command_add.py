@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+from inventory import Inventory
+
 
 def run(args):
-    print('add')
+    with Inventory(args.inventory) as inventory:
+        pass
