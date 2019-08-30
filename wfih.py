@@ -4,7 +4,6 @@ import argparse
 
 import command_add
 import command_show
-import command_top
 
 
 def create_parser():
@@ -21,9 +20,6 @@ def create_parser():
 
     parser_top = subparsers.add_parser('show', help='show full inventory')
     parser_top.set_defaults(command=command_show.run)
-
-    parser_top = subparsers.add_parser('top', help='sort inventory by value')
-    parser_top.set_defaults(command=command_top.run)
 
     return parser
 
