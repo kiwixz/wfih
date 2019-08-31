@@ -15,5 +15,5 @@ class Market:
             raise Exception('could not find item')
         return matches[0]
 
-    def stats(self, item):
-        return self.db[item]['stats'][-1]
+    def item(self, item):
+        return self.db[item]

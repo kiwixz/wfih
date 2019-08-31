@@ -9,13 +9,17 @@ def run(args):
     with Inventory(args.inventory) as inventory:
         items = ({'name': item['name'],
                   'count': item['count'],
-                  'stats': market.stats(item['name'])}
+                  'market': market.item(item['name'])}
                  for item in inventory.get_items())
-        items = sorted(items, key=lambda a: -a["stats"]["median"])
 
-        print(f'{"":60} {"Volume":>9} {"Price":>9}')
+        if args.ducats:
+            items = sorted(items, key=lambda a: -a["market"]["ducats"] / a['market']['stats'][-1]['median'])
+        else:
+            items = sorted(items, key=lambda a: -a['market']['stats'][-1]['median'])
+
+        print(f'{"Ducats/Price":>60} {"Volume":>9} {"Price":>9}')
         for item in items:
             label = f'{item["count"]}x {item["name"].replace("_", " ").title()}'
-            volume = item["stats"]["volume"]
-            price = item["stats"]["median"]
-            print(f'{label:60} {volume:9} {price:9}')
+            market_stats = item['market']['stats'][-1]
+            ducats = item["market"]["ducats"] / market_stats["median"]
+            print(f'{label:50} {ducats:9.2f} {market_stats["volume"]:9} {market_stats["median"]:9.2f}')
