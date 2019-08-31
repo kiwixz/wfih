@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import os
 
 import command_add
 import command_show
@@ -32,6 +33,7 @@ def create_parser():
 if __name__ == '__main__':
     parser = create_parser()
     args = parser.parse_args()
+    os.makedirs('data', exist_ok=True)
     if 'command' in args:
         args.command(args)
     else:
