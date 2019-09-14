@@ -23,6 +23,7 @@ def create_parser():
     parser_show = subparsers.add_parser('show', help='show full inventory')
     parser_show.set_defaults(command=command_show.run)
     parser_show.add_argument('-d', '--ducats', action='store_true', help='sort by ducats/price value')
+    parser_show.add_argument('-p', '--plats', action='store_true', help='sort by price')
 
     parser_update = subparsers.add_parser('update')
     parser_update.set_defaults(command=command_update.run)
