@@ -6,13 +6,13 @@ import json
 
 class Market:
     def __init__(self, file):
-        with open(file, 'r') as f:
-            self.db = json.load(f)['items']
+        with open(file, "r") as f:
+            self.db = json.load(f)["items"]
 
     def guess_name(self, item):
         matches = difflib.get_close_matches(item, self.db.keys(), 1, 0.1)
         if not matches:
-            raise Exception('could not find item')
+            raise Exception("could not find item")
         return matches[0]
 
     def item(self, item):
